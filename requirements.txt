@@ -14,3 +14,4 @@ pmdarima
 dill
 gluonts
 mxnet
+pyflux
