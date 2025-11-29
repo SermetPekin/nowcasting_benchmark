@@ -6,10 +6,16 @@
 > [!WARNING]
 > **Work in Progress**: This is ongoing reproduction work to verify functionality in a specific environment. Not all notebooks and methodologies have been fully tested and verified yet. Use with caution and refer to the original repository for production use.
 
+## 🚀 Getting Started
+
+- **Want to run notebooks manually in Jupyter/VS Code?** → See **[MANUAL_SETUP.md](MANUAL_SETUP.md)**
+- **Want automated batch execution?** → Continue reading this README
+
 ## Table of Contents
 - [Overview](#overview)
 - [Prerequisites](#prerequisites)
 - [Quick Start](#quick-start)
+- [Manual Setup (Interactive Notebooks)](#manual-setup-interactive-notebooks)
 - [Configuration System](#configuration-system)
 - [Command Line Options](#command-line-options)
 - [Examples](#examples)
@@ -127,6 +133,24 @@ python3 run_notebooks_with_cache.py --multiplier 2.0
 - Python notebooks execute with `nowcasting_venv` kernel
 - R notebooks execute with `ir` kernel
 - Results cached in `.notebook_execution_cache.json`
+
+---
+
+## Manual Setup (Interactive Notebooks)
+
+**Want to run notebooks manually in Jupyter/VS Code instead of using the automation?**
+
+See **[MANUAL_SETUP.md](MANUAL_SETUP.md)** for detailed instructions on:
+- Setting up Python environment with `uv` or `pip`
+- Installing R packages
+- Running notebooks interactively in VS Code or Jupyter
+- Quick troubleshooting for manual runs
+
+This is recommended if you want to:
+- Explore notebooks interactively
+- Run specific cells or modify code
+- Debug individual notebooks
+- Learn how the methodologies work
 
 ---
 
