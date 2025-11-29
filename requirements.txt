@@ -1,0 +1,16 @@
+matplotlib
+numpy<2.0
+pandas<2.0
+
+scikit-learn
+scipy
+seaborn
+xarray
+nowcast_lstm
+ipykernel
+nowcast_lstm 
+torch
+pmdarima
+dill
+gluonts
+mxnet

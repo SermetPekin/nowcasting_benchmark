@@ -1,0 +1,20 @@
+# Requirements for Apple Silicon Macs
+# Note: DeepVAR model (model_deepvar.ipynb) will not work on Apple Silicon
+# due to mxnet incompatibility. All other models should work fine.
+
+matplotlib
+numpy<2.0
+pandas<2.0
+scikit-learn
+scipy
+seaborn
+xarray
+nowcast_lstm
+ipykernel
+torch
+pmdarima
+dill
+
+# The following packages are excluded for Apple Silicon compatibility:
+# gluonts - requires mxnet which doesn't support ARM64
+# mxnet - not compatible with Apple Silicon

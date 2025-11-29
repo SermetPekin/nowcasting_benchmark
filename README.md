@@ -1,4 +1,8 @@
 # nowcasting_benchmark
+
+> [!NOTE]
+> **This is a reproduction fork for testing and compatibility improvements. For the original repository, see [dhopp1/nowcasting_benchmark](https://github.com/dhopp1/nowcasting_benchmark).**
+
 This repository is an accompaniment to an article (available [here](https://www.researchgate.net/publication/375338704_Benchmarking_econometric_and_machine_learning_methodologies_in_nowcasting_GDP) or [here](https://rdcu.be/dqh30)) benchmarking common nowcasting and machine learning methodologies. It illustrates how to estimate each of the methods examined in the analysis in either R or Python. 17 methodologies were tested in nowcasting quarterly US GDP using data from the Federal Reserve of Economic Data (FRED). The variables chosen were those specified in [Bok, et al (2018)](https://www.newyorkfed.org/medialibrary/media/research/staff_reports/sr830.pdf). The methodologies were tested on a period dating from Q1 2002 to Q3 2022.
 
 In applied nowcasting exercises, ideally, several methodologies should be employed and their results compared empirically for final model selection. In practice, this is difficult due to the fragmented landscape of different nowcasting methodology frameworks and implementations. This repository aims to make things significantly easier by giving fully runnable boilerplate code in R or Python for each methodology examined in this benchmarking analysis. The `methodologies/` directory contains self-contained Jupyter notebooks illustrating how each methodology can be run in the nowcasting context with an example using data from FRED and testing from 2005 to 2010. This was to reduce runtime for illustration, users can select their own testing periods if so desired.
