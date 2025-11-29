@@ -48,12 +48,24 @@ Install R and the IRkernel package:
 # Install R (via Homebrew on macOS)
 brew install r
 
-# Install required R packages
-R -e 'install.packages(c("IRkernel", "tidyverse", "midasr", "midasml", "imputeTS", "Rmisc", "mfbvar", "nowcastDFM", "nowcastLSTM"), repos="https://cran.r-project.org")'
+# Install required R packages (automated script - recommended)
+Rscript install_r_packages.R
+
+# OR install manually:
+# First install CRAN packages
+R -e 'install.packages(c("IRkernel", "tidyverse", "plyr", "dplyr", "midasr", "midasml", "imputeTS", "Rmisc", "mfbvar", "devtools"), repos="https://cran.r-project.org")'
+
+# Then install GitHub packages
+R -e 'devtools::install_github(c("dhopp1/nowcastDFM", "dhopp1/nowcastLSTM"))'
 
 # Install the R kernel for Jupyter
 R -e 'IRkernel::installspec(user = TRUE)'
 ```
+
+**The `install_r_packages.R` script:**
+- Checks which packages are already installed
+- Only installs missing packages
+- Includes all dependencies needed for R notebooks (BVAR, DFM, LSTM, MIDAS, MIDASML)
 
 **Verify both kernels are installed:**
 ```bash
@@ -305,7 +317,15 @@ jupyter kernelspec list
 ### R: "Error in library(XXX) : there is no package called 'XXX'"
 The R kernel can't find required packages. Install them:
 ```bash
-R -e 'install.packages(c("tidyverse", "midasr", "midasml", "imputeTS", "Rmisc", "mfbvar", "nowcastDFM", "nowcastLSTM"), repos="https://cran.r-project.org")'
+# Use the automated script (recommended)
+Rscript install_r_packages.R
+
+# OR install manually
+# CRAN packages:
+R -e 'install.packages(c("tidyverse", "plyr", "dplyr", "midasr", "midasml", "imputeTS", "Rmisc", "mfbvar", "devtools"), repos="https://cran.r-project.org")'
+
+# GitHub packages (nowcastDFM, nowcastLSTM):
+R -e 'devtools::install_github(c("dhopp1/nowcastDFM", "dhopp1/nowcastLSTM"))'
 ```
 
 ### R: "Kernel 'ir' not found"
