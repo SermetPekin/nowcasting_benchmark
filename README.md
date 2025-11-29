@@ -3,6 +3,51 @@
 > [!NOTE]
 > **This is a reproduction fork for testing and compatibility improvements. For the original repository, see [dhopp1/nowcasting_benchmark](https://github.com/dhopp1/nowcasting_benchmark).**
 
+## Reproduction Work
+
+This fork focuses on making the notebooks runnable on Apple Silicon (M-series) Macs with modern Python versions. Key improvements:
+
+### 📋 Documentation
+- **[README_EXECUTION.md](README_EXECUTION.md)** - Complete guide for automated notebook execution system with configuration-based timeouts, caching, and virtual environment setup
+- **[NOTEBOOK_EXECUTION_LOG.md](NOTEBOOK_EXECUTION_LOG.md)** - Manual tracking log of notebook execution status and compatibility
+
+### 🛠️ Configuration System
+- **notebook_config.json** - Central configuration for timeouts, skip lists, notebook patterns, and execution settings
+- **run_notebooks_with_cache.py** - Automated execution script with:
+  - Virtual environment support (`.venv`)
+  - Jupyter kernel integration (`nowcasting_venv`)
+  - Configurable timeouts per category
+  - Caching for successful runs
+  - Command-line options (`--force`, `--multiplier`, `--dry-run`)
+
+### 🔧 Compatibility Fixes
+- **requirements-apple-silicon.txt** - Apple Silicon compatible package versions
+- Modified notebooks to work with `nest_asyncio` for event loop issues
+- Identified incompatible packages (pyflux, gluonts/mxnet) and documented alternatives
+
+### 🚀 Quick Start for Reproduction
+
+```bash
+# 1. Setup virtual environment
+python3 -m venv .venv
+source .venv/bin/activate
+uv pip install -r requirements-apple-silicon.txt
+
+# 2. Install Jupyter kernel
+python3 -m ipykernel install --user --name=nowcasting_venv --display-name="Python (nowcasting_venv)"
+
+# 3. Run notebooks with automated system
+python3 run_notebooks_with_cache.py --dry-run  # Preview execution plan
+python3 run_notebooks_with_cache.py            # Run with caching
+python3 run_notebooks_with_cache.py --force    # Fresh run without cache
+```
+
+See [README_EXECUTION.md](README_EXECUTION.md) for detailed documentation.
+
+---
+
+## Original Repository Information
+
 This repository is an accompaniment to an article (available [here](https://www.researchgate.net/publication/375338704_Benchmarking_econometric_and_machine_learning_methodologies_in_nowcasting_GDP) or [here](https://rdcu.be/dqh30)) benchmarking common nowcasting and machine learning methodologies. It illustrates how to estimate each of the methods examined in the analysis in either R or Python. 17 methodologies were tested in nowcasting quarterly US GDP using data from the Federal Reserve of Economic Data (FRED). The variables chosen were those specified in [Bok, et al (2018)](https://www.newyorkfed.org/medialibrary/media/research/staff_reports/sr830.pdf). The methodologies were tested on a period dating from Q1 2002 to Q3 2022.
 
 In applied nowcasting exercises, ideally, several methodologies should be employed and their results compared empirically for final model selection. In practice, this is difficult due to the fragmented landscape of different nowcasting methodology frameworks and implementations. This repository aims to make things significantly easier by giving fully runnable boilerplate code in R or Python for each methodology examined in this benchmarking analysis. The `methodologies/` directory contains self-contained Jupyter notebooks illustrating how each methodology can be run in the nowcasting context with an example using data from FRED and testing from 2005 to 2010. This was to reduce runtime for illustration, users can select their own testing periods if so desired.

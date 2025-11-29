@@ -1,0 +1,55 @@
+{
+  "execution": {
+    "default_timeout": 60,
+    "timeout_by_category": {
+      "regression": 60,
+      "tree": 120,
+      "timeseries": 180,
+      "neural": 240,
+      "bayesian": 180
+    },
+    "global_timeout_multiplier": 1.0
+  },
+  "skip_notebooks": {
+    "py_var.ipynb": "pyflux not compatible with Apple Silicon/modern Python",
+    "py_deepvar.ipynb": "gluonts/mxnet not compatible with Apple Silicon",
+    "py_gb.ipynb": "Gradient Boosting too slow for standard testing",
+    "r_bvar.ipynb": "BVAR execution takes extremely long (hours)"
+  },
+  "notebook_patterns": {
+    "include": [
+      "methodologies/py_ols.ipynb",
+      "methodologies/r_midas.ipynb"
+    ],
+    "exclude": []
+  },
+  "cache": {
+    "enabled": true,
+    "cache_file": ".notebook_execution_cache.json",
+    "force_fresh_run": false
+  },
+  "output": {
+    "results_file": "notebook_execution_results.csv",
+    "log_file": "NOTEBOOK_EXECUTION_LOG.md"
+  },
+  "categories": {
+    "py_ols.ipynb": "regression",
+    "py_lasso.ipynb": "regression",
+    "py_ridge.ipynb": "regression",
+    "py_elasticnet.ipynb": "regression",
+    "py_dt.ipynb": "tree",
+    "py_rf.ipynb": "tree",
+    "py_gb.ipynb": "tree",
+    "py_xgboost.ipynb": "tree",
+    "py_arma.ipynb": "timeseries",
+    "py_mlp.ipynb": "neural",
+    "py_lstm.ipynb": "neural",
+    "r_bvar.ipynb": "bayesian",
+    "r_dfm.ipynb": "timeseries",
+    "r_midas.ipynb": "timeseries",
+    "r_midasml.ipynb": "timeseries",
+    "r_lstm.ipynb": "neural",
+    "py_var.ipynb": "timeseries",
+    "py_deepvar.ipynb": "neural"
+  }
+}
