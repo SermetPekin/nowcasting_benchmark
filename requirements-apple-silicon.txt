@@ -1,6 +1,13 @@
-# Requirements for Apple Silicon Macs
+# Apple Silicon (M-series) Compatible Requirements
+# Original Repository: https://github.com/dhopp1/nowcasting_benchmark
+# Reproduction/Extension: Sermet Pekin (https://github.com/SermetPekin/nowcasting_benchmark)
+# Purpose: Package versions tested for Apple Silicon compatibility
+# Date: November 2025
+#
+# This file contains package versions tested and working on Apple Silicon Macs.
 # Note: DeepVAR model (py_deepvar.ipynb) and VAR model (py_var.ipynb) 
 # will not work on Apple Silicon due to package incompatibility.
+# Excludes: pyflux, gluonts, mxnet
 
 matplotlib
 numpy<2.0

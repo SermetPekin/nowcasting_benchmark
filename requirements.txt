@@ -1,3 +1,11 @@
+# Python Requirements for Nowcasting Benchmark
+# Original Repository: https://github.com/dhopp1/nowcasting_benchmark
+# Reproduction/Extension: Sermet Pekin (https://github.com/SermetPekin/nowcasting_benchmark)
+# Purpose: Extended requirements for reproduction with modern packages
+# Date: November 2025
+#
+# Note: For Apple Silicon compatibility, use requirements-apple-silicon.txt instead
+
 matplotlib
 numpy<2.0
 pandas<2.0

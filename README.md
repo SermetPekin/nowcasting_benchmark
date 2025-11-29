@@ -3,6 +3,9 @@
 > [!NOTE]
 > **This is a reproduction fork for testing and compatibility improvements. For the original repository, see [dhopp1/nowcasting_benchmark](https://github.com/dhopp1/nowcasting_benchmark).**
 
+> [!WARNING]
+> **Work in Progress**: This is ongoing reproduction work to verify functionality in a specific environment. Not all notebooks and methodologies have been fully tested and verified yet. Use with caution and refer to the original repository for production use.
+
 ## Table of Contents
 - [Overview](#overview)
 - [Prerequisites](#prerequisites)

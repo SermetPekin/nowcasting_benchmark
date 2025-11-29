@@ -1,8 +1,19 @@
 #!/usr/bin/env python3
 """
 Automated Notebook Execution with Configuration
+
 Runs Jupyter notebooks with configurable timeouts, skip lists, and caching.
+Supports both Python and R notebooks with automatic kernel detection.
 Configuration is read from notebook_config.json.
+
+Original Repository: https://github.com/dhopp1/nowcasting_benchmark
+Reproduction/Extension: Sermet Pekin (https://github.com/SermetPekin/nowcasting_benchmark)
+Purpose: Extend and reproduce functionality with modern package compatibility
+Date: November 2025
+License: MIT
+
+NOTE: This is ongoing work to verify reproduction in a specific environment.
+      Not all code has been fully tested and verified yet.
 """
 
 import json

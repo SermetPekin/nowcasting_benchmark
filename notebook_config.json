@@ -1,4 +1,12 @@
 {
+  "_metadata": {
+    "original_repository": "https://github.com/dhopp1/nowcasting_benchmark",
+    "reproduction_by": "Sermet Pekin",
+    "reproduction_repository": "https://github.com/SermetPekin/nowcasting_benchmark",
+    "purpose": "Configuration for automated notebook execution system with modern package compatibility",
+    "status": "Work in Progress - ongoing reproduction verification",
+    "date": "November 2025"
+  },
   "execution": {
     "default_timeout": 60,
     "timeout_by_category": {

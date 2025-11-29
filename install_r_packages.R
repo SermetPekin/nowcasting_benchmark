@@ -1,4 +1,12 @@
 # R Package Installation Script for Nowcasting Benchmark
+#
+# Original Repository: https://github.com/dhopp1/nowcasting_benchmark
+# Reproduction/Extension: Sermet Pekin (https://github.com/SermetPekin/nowcasting_benchmark)
+# Purpose: Automate R package installation for reproduction with modern package versions
+# Date: November 2025
+#
+# This script installs all required R packages for the nowcasting benchmark
+# notebooks, including CRAN packages and GitHub-hosted packages.
 
 # CRAN packages
 cran_packages <- c(
