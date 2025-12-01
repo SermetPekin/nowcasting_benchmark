@@ -1,0 +1,44 @@
+{
+  "_metadata": {
+    "description": "Config for refactored methodologies_v2/ folder notebooks using nowcasting_framework.py"
+  },
+  "execution": {
+    "default_timeout": 30,
+    "timeout_by_category": {
+      "regression": 30,
+      "tree": 60,
+      "timeseries": 90,
+      "neural": 120
+    },
+    "global_timeout_multiplier": 1.0
+  },
+  "skip_notebooks": {},
+  "notebook_patterns": {
+    "include": [
+      "methodologies_v2/py_*_framework.ipynb",
+      "methodologies_v2/example_*.ipynb"
+    ],
+    "exclude": []
+  },
+  "cache": {
+    "enabled": true,
+    "cache_file": ".cache_framework.json",
+    "force_fresh_run": false
+  },
+  "output": {
+    "results_file": "results_framework.csv",
+    "log_file": "log_framework.md"
+  },
+  "categories": {
+    "py_ols_framework.ipynb": "regression",
+    "py_lasso_framework.ipynb": "regression",
+    "py_ridge_framework.ipynb": "regression",
+    "py_elasticnet_framework.ipynb": "regression",
+    "py_dt_framework.ipynb": "tree",
+    "py_rf_framework.ipynb": "tree",
+    "py_xgboost_framework.ipynb": "tree",
+    "py_gb_framework.ipynb": "tree",
+    "example_professional_structure.ipynb": "regression",
+    "example_using_framework.ipynb": "regression"
+  }
+}
