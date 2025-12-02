@@ -21,3 +21,4 @@ torch
 pmdarima
 dill
 nest-asyncio
+pyyaml

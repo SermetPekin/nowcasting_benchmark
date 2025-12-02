@@ -85,6 +85,65 @@ class NowcastConfig:
         if self.lags is None:
             self.lags = list(range(-2, 3))
     
+    @classmethod
+    def from_yaml(cls, filepath: str) -> 'NowcastConfig':
+        """
+        Load configuration from YAML file.
+        
+        Args:
+            filepath: Path to YAML configuration file
+            
+        Returns:
+            NowcastConfig instance
+            
+        Example:
+            config = NowcastConfig.from_yaml("configs/ols_baseline.yaml")
+        """
+        try:
+            import yaml
+        except ImportError:
+            raise ImportError("PyYAML is required for YAML support. Install with: pip install pyyaml")
+        
+        with open(filepath, 'r') as f:
+            params = yaml.safe_load(f)
+        
+        return cls(**params)
+    
+    def to_yaml(self, filepath: str):
+        """
+        Save configuration to YAML file.
+        
+        Args:
+            filepath: Path where YAML file will be saved
+            
+        Example:
+            config.to_yaml("configs/my_experiment.yaml")
+        """
+        try:
+            import yaml
+        except ImportError:
+            raise ImportError("PyYAML is required for YAML support. Install with: pip install pyyaml")
+        
+        # Convert to dict with all fields
+        config_dict = {
+            'data_path': self.data_path,
+            'metadata_path': self.metadata_path,
+            'target_variable': self.target_variable,
+            'train_start_date': self.train_start_date,
+            'test_start_date': self.test_start_date,
+            'test_end_date': self.test_end_date,
+            'lags': self.lags,
+            'n_lags': self.n_lags,
+            'quarterly_only': self.quarterly_only,
+            'n_ensemble_models': self.n_ensemble_models
+        }
+        
+        if self.variable_lags:
+            config_dict['variable_lags'] = self.variable_lags
+        
+        with open(filepath, 'w') as f:
+            yaml.dump(config_dict, f, default_flow_style=False, sort_keys=False)
+    
     def to_dict(self) -> Dict[str, Any]:
         """
         Convert config to dictionary for logging.

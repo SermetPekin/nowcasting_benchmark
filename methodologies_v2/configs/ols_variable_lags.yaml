@@ -1,0 +1,40 @@
+# OLS with Variable-Specific Lags
+# More lags for high-frequency monthly indicators, fewer for quarterly
+
+data_path: ../data/data_tf.csv
+metadata_path: ../data/meta_data.csv
+
+target_variable: gdpc1
+
+train_start_date: "1947-01-01"
+test_start_date: "2005-03-01"
+test_end_date: "2010-03-01"
+
+lags:
+  - -2
+  - -1
+  - 0
+  - 1
+  - 2
+
+n_lags: 3
+
+variable_lags:
+  # Monthly labor market (6 lags)
+  payems: 6
+  unrate: 4
+  
+  # Monthly production (6 lags)
+  indpro: 6
+  tcu: 4
+  
+  # Quarterly prices (fewer lags)
+  gdpdef: 2
+  cpilfesl: 3
+  
+  # Leading indicators
+  permit: 4
+  houst: 4
+
+quarterly_only: true
+n_ensemble_models: 1

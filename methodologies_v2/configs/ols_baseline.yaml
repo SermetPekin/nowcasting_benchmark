@@ -1,0 +1,22 @@
+# OLS Baseline Configuration
+# Simple configuration with uniform lags for all variables
+
+data_path: ../data/data_tf.csv
+metadata_path: ../data/meta_data.csv
+
+target_variable: gdpc1
+
+train_start_date: "1947-01-01"
+test_start_date: "2005-03-01"
+test_end_date: "2010-03-01"
+
+lags:
+  - -2
+  - -1
+  - 0
+  - 1
+  - 2
+
+n_lags: 3
+quarterly_only: true
+n_ensemble_models: 1
