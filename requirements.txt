@@ -20,7 +20,4 @@ nowcast_lstm
 torch
 pmdarima
 dill
-gluonts
-mxnet
-pyflux
 nest-asyncio

@@ -52,7 +52,8 @@ class NowcastConfig:
         test_start_date: Start date for test period
         test_end_date: End date for test period
         lags: List of vintage lags to evaluate
-        n_lags: Number of lags to use in feature engineering
+        n_lags: Number of lags to use in feature engineering (default for all variables)
+        variable_lags: Optional dict mapping variable names to specific lag counts
         quarterly_only: Whether to use only quarterly data for training
         n_ensemble_models: Number of models in ensemble (for stochastic models)
     """
@@ -73,6 +74,7 @@ class NowcastConfig:
     
     # Model configuration
     n_lags: int = 4
+    variable_lags: Optional[Dict[str, int]] = None
     quarterly_only: bool = True
     
     # Ensemble configuration (for stochastic models)
@@ -90,13 +92,16 @@ class NowcastConfig:
         Returns:
             Dictionary with key configuration parameters
         """
-        return {
+        config_dict = {
             'target': self.target_variable,
             'test_period': f"{self.test_start_date} to {self.test_end_date}",
             'lags': self.lags,
             'n_lags': self.n_lags,
             'n_ensemble': self.n_ensemble_models
         }
+        if self.variable_lags:
+            config_dict['variable_lags'] = self.variable_lags
+        return config_dict
 
 
 class DataManager:
@@ -305,8 +310,9 @@ class ModelManager:
             transformed_train = prepare_flat_data(
                 train_data, 
                 self.config.target_variable, 
-                self.config.n_lags, 
-                self.config.quarterly_only
+                self.config.n_lags,
+                self.config.quarterly_only,
+                self.config.variable_lags
             )
             
             # Train ensemble
@@ -318,7 +324,7 @@ class ModelManager:
             for lag in self.config.lags:
                 vintage_data = data_manager.get_vintage_data(date, lag)
                 vintage_data = mean_fill_dataset(train_data, vintage_data)
-                vintage_data = flatten_data(vintage_data, self.config.target_variable, self.config.n_lags)
+                vintage_data = flatten_data(vintage_data, self.config.target_variable, self.config.n_lags, self.config.variable_lags)
                 
                 X_pred = vintage_data.loc[
                     vintage_data.date == date, :
@@ -648,7 +654,8 @@ class InferencePipeline:
             new_data,
             self.config.target_variable,
             self.config.n_lags,
-            quarterly_only=False
+            quarterly_only=False,
+            variable_lags=self.config.variable_lags
         )
         
         # Extract features for target date

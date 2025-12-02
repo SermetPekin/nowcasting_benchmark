@@ -75,17 +75,48 @@ def gen_lagged_data(metadata, data, last_date, lag):
     return lagged_data
 
 # helper function, flatten a dataset for methods that don't do timeseries, extra columns for each lag
-def flatten_data(data, target_variable, n_lags):
+def flatten_data(data, target_variable, n_lags, variable_lags=None):
+    """
+    Create lagged features from time series data.
+    
+    Args:
+        data: Input dataframe with time series
+        target_variable: Name of target variable
+        n_lags: Default number of lags for all variables
+        variable_lags: Optional dict mapping column names to specific lag counts.
+                      If provided, uses variable-specific lags; otherwise uses n_lags.
+    
+    Returns:
+        pd.DataFrame: Data with lagged features
+    """
     flattened_data = data.loc[~pd.isna(data[target_variable]), :]
     orig_index = flattened_data.index
-    for i in range(1, n_lags + 1):
-        lagged_indices = orig_index - i
-        lagged_indices = lagged_indices[lagged_indices >= 0]
-        tmp = data.loc[lagged_indices, :]
-        tmp.date = tmp.date + pd.DateOffset(months=i)
-        tmp = tmp.drop([target_variable], axis=1)
-        tmp.columns = [j + "_" + str(i) if j != "date" else j for j in tmp.columns]
-        flattened_data = flattened_data.merge(tmp, how="left", on="date")
+    
+    # Get list of feature columns (exclude date and target)
+    feature_cols = [col for col in data.columns if col not in ['date', target_variable]]
+    
+    if variable_lags is None:
+        # Original behavior: same lags for all variables
+        for i in range(1, n_lags + 1):
+            lagged_indices = orig_index - i
+            lagged_indices = lagged_indices[lagged_indices >= 0]
+            tmp = data.loc[lagged_indices, :]
+            tmp.date = tmp.date + pd.DateOffset(months=i)
+            tmp = tmp.drop([target_variable], axis=1)
+            tmp.columns = [j + "_" + str(i) if j != "date" else j for j in tmp.columns]
+            flattened_data = flattened_data.merge(tmp, how="left", on="date")
+    else:
+        # Variable-specific lags: create lags per column
+        for col in feature_cols:
+            col_lags = variable_lags.get(col, n_lags)  # Fall back to n_lags if not specified
+            
+            for i in range(1, col_lags + 1):
+                lagged_indices = orig_index - i
+                lagged_indices = lagged_indices[lagged_indices >= 0]
+                tmp = data.loc[lagged_indices, ['date', col]].copy()
+                tmp.date = tmp.date + pd.DateOffset(months=i)
+                tmp.columns = ['date', f"{col}_{i}"]
+                flattened_data = flattened_data.merge(tmp, how="left", on="date")
 
     return flattened_data
 
@@ -164,21 +195,22 @@ def plot_predictions(actuals, pred_dict, lags=None):
 # DATA PREPARATION FOR FLAT MODELS
 # ============================================================================
 
-def prepare_flat_data(data, target_variable, n_lags=4, quarterly_only=True):
+def prepare_flat_data(data, target_variable, n_lags=4, quarterly_only=True, variable_lags=None):
     """
     Prepare data for models that don't handle time series natively.
     
     Args:
         data: Input dataframe
         target_variable: Name of target variable
-        n_lags: Number of lags to include
+        n_lags: Number of lags to include (default for all variables)
         quarterly_only: If True, keep only quarterly observations
+        variable_lags: Optional dict mapping variable names to specific lag counts
         
     Returns:
         pd.DataFrame: Transformed data with lagged features
     """
     transformed = mean_fill_dataset(data, data)
-    transformed = flatten_data(transformed, target_variable, n_lags)
+    transformed = flatten_data(transformed, target_variable, n_lags, variable_lags)
     
     if quarterly_only:
         transformed = transformed.loc[
