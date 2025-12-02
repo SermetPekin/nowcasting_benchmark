@@ -5,7 +5,7 @@ This shows how to use YAML config files instead of inline configuration.
 """
 
 # Method 1: Inline (current approach)
-from nowcasting_framework import NowcastConfig, DataManager, ModelManager
+from methodologies_v2.nowkit.nowcasting_framework import NowcastConfig, DataManager, ModelManager
 from sklearn.linear_model import Ridge
 
 config = NowcastConfig(

@@ -21,7 +21,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from common import (
+from nowkit.common import (
     load_data,
     setup_test_data,
     get_test_dates_and_actuals,
