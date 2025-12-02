@@ -22,3 +22,5 @@ pmdarima
 dill
 nest-asyncio
 pyyaml
+xgboost
+
